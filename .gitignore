@@ -55,3 +55,6 @@ target/
 
 # OpenShift
 .openshift
+
+# vim
+.sw[po]
