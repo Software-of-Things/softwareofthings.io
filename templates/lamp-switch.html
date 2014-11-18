@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+		<!-- Main -->
+			<article id="main">
+
+				<header class="special container">
+					<span class="icon fa-code"></span>
+					<h2>Remote lamp switch</h2>
+                    <p>With a Raspberry Pi as the main hub control a lamp switch connected to an Arduino.
+                    <br/>The switch is exposed through a webserver so you can turn your lamp on/off from your phone!</p>
+				</header>
+					
+				<!-- One -->
+					<section class="wrapper style4 container">
+					
+						<!-- Content -->
+							<div class="content">
+								<section>
+									<p class="image featured"><img src="/static/images/project-lamp-switch.jpg" alt="" /></p>
+									<header>
+										<h3>Materials used</h3>
+									</header>
+                                    <ul>
+                                        <li>Raspberry Pi B+</li>
+                                        <li>Arduino Nano</li>
+                                        <li>2x nRF 24L01</li>
+                                        <li>2 channel relay</li>
+                                        <li>Breadboard</li>
+                                        <li>Jumper wires</li>
+                                    </ul>
+                                    <h3>WARNING!</h3>
+                                    <p>This tutorial involves 110v which is very dangerous. If you're afraid of blowing up something in your house read another tutorial, this is not for you. If you are brave enough, try to do this during the day, if you blow up everything in your house (you will blow up something I promise, tutorials are hard to follow!) is nicer to have sunlight to see and professional help to seek out.</p>
+                                    <h3>Instructions</h3>
+									<p>
+                                        1. <strong>Connect the lamp wire to the relay.</strong><br/>
+                                        Cut open the hot wire on your lamp cord, this is the side that goes into the shorter prong in the plug. Peel the ends and put them inside the relay according to the diagram below.
+                                    </p>
+									<p>2. <strong>Connect the Arduino to the nRF24 and the relay</strong><br/>
+                                    Follow the diagram below to connect the 7 wires from the nRF24 module and the 3 wires from the relay to the breadboard where your Arduino is.</p>
+                                    <p class="featured"><img src="/static/images/project-lamp-switch-arduino.jpg"/></p>
+									<p>3. <strong>Connect the Raspberry Pi to the nRF24 module</strong><br/>
+                                    Follow the diagram to connect the pins, the B+ model is not very informative about what the pins are, so follow the diagram closely and count the pins.</p>
+                                    <p class="featured"><img src="/static/images/project-lamp-switch-raspi.jpg"/></p>
+									<p>3. <strong>Load your Arduino code</strong></p>
+                                    <script src="http://gist-it.appspot.com/github/Software-of-Things/home-automation/blob/master/lamp-switch/arduino-switch.ino?footer=0"></script>
+
+									<p>4. <strong>Load your Raspberry Pi code</strong></p>
+									<p>Clone our repo in the Raspberry Pi:</p>
+                                    <p>$ git clone --recursive https://github.com/Software-of-Things/home-automation.git<br/>
+                                         $ cd home-automation/lamp-switch<br/>
+                                         $ make
+                                    </p>
+								</section>
+							</div>
+
+					</section>
+
+					
+			</article>
+{% endblock %}

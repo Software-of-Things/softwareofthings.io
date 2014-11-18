@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+		<!-- Banner -->		
+			<section id="banner">
+				
+				<!--
+					".inner" is set up as an inline-block so it automatically expands
+					in both directions to fit whatever's inside it. This means it won't
+					automatically wrap lines, so be sure to use line breaks where
+					appropriate (<br />).
+				-->
+				<div class="inner">
+					
+					<header>
+						<h2>Software of Things</h2>
+					</header>
+					<p>Where great software meets cheap hardware</p>
+					<footer>
+						<ul class="buttons vertical">
+							<li><a href="#main" class="button fit scrolly">Tell Me More</a></li>
+						</ul>
+					</footer>
+				
+				</div>
+				
+			</section>
+		
+		<!-- Main -->
+			<article id="main">
+
+				<header class="special container">
+					<span class="icon fa-users"></span>
+                    <h2>Who we are</h2>
+					<p>We are a group of people excited to explore the intersection between the hardware we augment our lives with 
+                    <br/>and the software that drives it, and we see <strong>IoT software</strong> as an opportunity for innovation.
+					</p>
+                    <p>We organize a <a href="http://www.meetup.com/The-San-Francisco-Software-of-Things-Meetup/">meetup in San Francisco</a> to share ideas, projects and experiences.
+                    <br/>We offer a space to hack on affordable hardware like Raspberry Pi, Arduino, LightBlue Bean to name a few.</p>
+				</header>
+					
+				<!-- One -->
+					<section class="wrapper style2 container special-alt">
+						<div class="row 50%">
+							<div class="12u 12u(2)">
+							
+								<header>
+									<h2>We offer a space for <strong>software developers</strong> to interact with <strong>hardware</strong>.</h2>
+								</header>
+								<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu comteger ut fermentum lorem. Lorem ipsum dolor sit amet. Sed tristique purus vitae volutpat ultrices. eu elit eget commodo. Sed tristique purus vitae volutpat ultrices. Aliquam eu elit eget arcu commodo.</p>
+								<footer>
+									<ul class="buttons">
+										<li><a href="http://www.meetup.com/The-San-Francisco-Software-of-Things-Meetup/" class="button">Check us out at meetup.com</a></li>
+									</ul>
+								</footer>
+							
+							</div>
+						</div>
+					</section>
+					
+					
+				<!-- Three -->
+					<section class="wrapper style3 container special">
+					
+						<header class="major">
+							<h2>Projects to get <strong>inspired</strong></h2>
+                            <p>This is not a collection of projects we found on the web and looked cool, we actually built these.<p>
+						</header>
+						
+						<div class="row">
+							<div class="6u 12u(2)">
+							
+								<section>
+									<a href="/projects/lamp-switch" class="image featured"><img src="static/images/project-lamp-switch.jpg" alt="" /></a>
+									<header>
+										<h3><a href="/projects/lamp-switch">Remote lamp switch</a></h3>
+									</header>
+									<p>With a Raspberry Pi as the main hub control a lamp switch connected to an Arduino. The switch is exposed through a webserver so you can turn your lamp on/off from your phone!</p>
+								</section>
+
+							</div>
+						</div>
+
+					</section>
+					
+			</article>
+
+{% endblock %}
