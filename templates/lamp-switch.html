@@ -22,12 +22,11 @@
 										<h3>Materials used</h3>
 									</header>
                                     <ul>
-                                        <li>Raspberry Pi B+</li>
-                                        <li>Arduino Nano</li>
-                                        <li>2x nRF 24L01</li>
-                                        <li>2 channel relay</li>
-                                        <li>Breadboard</li>
-                                        <li>Jumper wires</li>
+                                        <li><a href="http://www.amazon.com/gp/product/B00LPESRUK/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00LPESRUK&linkCode=as2&tag=softwareofthings-20&linkId=UM5MIZCF2K7HU2GG">Raspberry Pi Model B+</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=softwareofthings-20&l=as2&o=1&a=B00LPESRUK" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></li>
+                                        <li><a href="http://www.amazon.com/gp/product/B00F7RPAZ6/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00F7RPAZ6&linkCode=as2&tag=softwareofthings-20&linkId=OP4JU3TG7X5VUXJS">Arduino Nano</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=softwareofthings-20&l=as2&o=1&a=B00F7RPAZ6" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></li>
+                                        <li><a href="http://www.amazon.com/gp/product/B00E594ZX0/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00E594ZX0&linkCode=as2&tag=softwareofthings-20&linkId=ACCVIRT4I3MHNYWQ">2x nRF24L01+ 2.4GHz Wireless Transceiver</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=softwareofthings-20&l=as2&o=1&a=B00E594ZX0" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+                                        <li><a href="http://www.amazon.com/gp/product/B00C59NOHK/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00C59NOHK&linkCode=as2&tag=softwareofthings-20&linkId=LTSFFMLVF5CCTM4W">2-channel 5V Relay</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=softwareofthings-20&l=as2&o=1&a=B00C59NOHK" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></li>
+                                        <li><a href="http://www.amazon.com/gp/product/B004RXKWDQ/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B004RXKWDQ&linkCode=as2&tag=softwareofthings-20&linkId=LOG4AHIISCFZPPWX">Breadboard and jumper wires</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=softwareofthings-20&l=as2&o=1&a=B004RXKWDQ" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></li>
                                     </ul>
                                     <h3>WARNING!</h3>
                                     <p>This tutorial involves 110v which is very dangerous. If you're afraid of blowing up something in your house read another tutorial, this is not for you. If you are brave enough, try to do this during the day, if you blow up everything in your house (you will blow up something I promise, tutorials are hard to follow!) is nicer to have sunlight to see and professional help to seek out.</p>
@@ -45,17 +44,50 @@
 									<p>3. <strong>Load your Arduino code</strong></p>
                                     <script src="http://gist-it.appspot.com/github/Software-of-Things/home-automation/blob/master/lamp-switch/arduino-switch.ino?footer=0"></script>
 
-									<p>4. <strong>Load your Raspberry Pi code</strong></p>
+									<p>4. <strong>Configure Raspberry Pi for nRF24</strong></p>
+                                    <p>In /etc/modprobe.d/raspi-blacklist.conf comment the lines spi-bcm2708 and i2c-bcm2708</p>
+                                    <p>In /etc/modules add the line "i2c"</p>
+                                    <p>$ cd /home/pi/projects/home-automation/RF24/RPio/RF24<br/>
+                                       $ make && sudo make install<br/>
+                                       $ cd /home/pi/projects/home-automation/lamp-switch<br/>
+                                       $ make<br/>
+                                    </p>
+
+									<p>5. <strong>Load your Raspberry Pi code</strong></p>
 									<p>Clone our repo in the Raspberry Pi:</p>
                                     <p>$ git clone --recursive https://github.com/Software-of-Things/home-automation.git<br/>
                                          $ cd home-automation/lamp-switch<br/>
-                                         $ make
+                                         $ make<br/>
                                     </p>
+									<p>6. <strong>Setup your web server</strong></p>
+                                    <p>$ sudo apt-get install nginx uwsgi uwsgi-plugin-python<br/>
+                                       $ cd /home/pi/projects/home-automation/lamp-switch<br/>
+                                       $ virtualenv venv --no-site-packages<br/>
+                                       $ ./venv/bin/pip install -r requirements.txt<br/>
+                                       $ sudo cp switch-site /etc/nginx/sites-available/<br/>
+                                       $ sudo ln -s /etc/nginx/sites-available/switch-site /etc/nginx/sites-enabled/switch-site<br/>
+                                       $ sudo cp switch.ini /etc/uwsgi/apps-available/<br/>
+                                       $ sudo ln -s /etc/uwsgi/apps-available/switch.ini /etc/uwsgi/apps-enabled/switch.ini<br/>
+                                       $ sudo service nginx restart<br/>
+                                       $ sudo service uwsgi restart<br/>
+                                    <p>Please leave us feedback below if anything goes wrong.<br/><strong>Enjoy!</strong</p>
 								</section>
+
 							</div>
 
+                            <div id="disqus_thread"></div>
+                            <script type="text/javascript">
+                                var disqus_shortname = 'softwareofthings';
+                                (function() {
+                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                })();
+                            </script>
+                            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
 					</section>
-
+                    
 					
 			</article>
 {% endblock %}
